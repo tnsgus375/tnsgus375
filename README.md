@@ -39,45 +39,44 @@
 
 ---
 
-#### 담당 기능 상세
+#### 담당 기능 상세 (PR 링크 포함)
 
-**1. OCR 문서관리**
-- 처방전·검사결과 사진 업로드 → CLOVA OCR로 텍스트 추출 → OpenAI GPT로 날짜·병원명·진단명·약품명 구조화
-- Celery + Redis 비동기 처리 (PENDING → PROCESSING → COMPLETED)
-- 프론트 3초 interval polling으로 완료 감지
-
-**2. 식이정보 시스템**
+**1. 식이정보 시스템** · [#156](https://github.com/AI-HealthCare-03/AH_03_07/pull/156)
 - 13개 질환별 추천·제한 음식 및 영양학적 근거 제공
 - 식품영양학 전공 지식 직접 활용 — 나트륨·퓨린 함량, GI지수 기반 분류 기준 설계
 - 936건 시드 데이터 직접 설계 (13개 질환 × 6개 식품 카테고리 × 추천/제한)
 - 의료법 §27 준수: 섭취량 수치·식단 처방 미제공, 면책 문구 필수 포함
 
-**3. 건강수치 기록**
-- 혈압·혈당·체중 매일 기록 및 추이 시각화
-- 혈압: 수축기/이완기 분리 저장 → "120/80 mmHg" 합산 표시
-- Decimal 타입 변환 안전장치 (InvalidOperation 방어)
+**2. OCR 문서관리** · [#174](https://github.com/AI-HealthCare-03/AH_03_07/pull/174)
+- 처방전·검사결과 사진 업로드 → CLOVA OCR 텍스트 추출 → OpenAI GPT 구조화
+- Celery + Redis 비동기 처리 (PENDING → PROCESSING → COMPLETED)
+- 프론트 3초 interval polling으로 완료 감지
 
-**4. 건강일기**
-- 매일 컨디션·증상·복약체크 기록
-- 아픈 부위 9종 / 느낌 5종 복수 선택, 복약(아침·점심·저녁) JSON 저장
-- WeasyPrint + Jinja2로 진료용 PDF 생성
-
-**5. 응급카드 · SOS**
+**3. 응급카드 · SOS** · [#31](https://github.com/AI-HealthCare-03/AH_03_07/pull/31) · [#83](https://github.com/AI-HealthCare-03/AH_03_07/pull/83)
 - 응급 상황 시 구급대원이 환자 정보 즉시 확인
 - 혈액형 / 기저질환 / 복용약물 / 알레르기 / 보호자 최대 3인 관리
 - `POST /emergency/trigger` → 보호자 알림 생성 + AuditLog 기록 (법적 증거 보존)
 
-**6. 약국 찾기**
+**4. 건강수치 기록** · [#32](https://github.com/AI-HealthCare-03/AH_03_07/pull/32) · [#183](https://github.com/AI-HealthCare-03/AH_03_07/pull/183)
+- 혈압·혈당·체중 매일 기록 및 추이 시각화
+- 혈압: 수축기/이완기 분리 저장 → "120/80 mmHg" 합산 표시
+- Decimal 타입 변환 안전장치 (InvalidOperation 방어)
+
+**5. 건강일기** · [#30](https://github.com/AI-HealthCare-03/AH_03_07/pull/30)
+- 매일 컨디션·증상·복약체크 기록
+- 아픈 부위 9종 / 느낌 5종 복수 선택, 복약(아침·점심·저녁) JSON 저장
+- WeasyPrint + Jinja2로 진료용 PDF 생성
+
+**6. 약국 찾기** · [#180](https://github.com/AI-HealthCare-03/AH_03_07/pull/180)
 - Google Maps & Places API로 현재 위치 기반 주변 약국 검색
 - 마커 표시, 영업시간·전화번호·거리 표시, 길찾기 연동
 
-**7. 약물목록**
+**7. 복약 알림** · [#97](https://github.com/AI-HealthCare-03/AH_03_07/pull/97)
+- Celery Beat으로 처방 종료일 D-7·D-3·D-1 자동 알림
 - 직접 등록 또는 OCR 처방전 → LLM 자동 구조화 등록
-- 복용 기한 D-7 이내 배지 표시, Celery Beat 알림
 
-**8. 진료기록**
-- 병원 방문 기록 관리, Soft Delete, 기간·병원명·진단명 필터
-- Row-level 보안: user_id 기반 본인 데이터만 접근
+**8. 약품 인식** · [#179](https://github.com/AI-HealthCare-03/AH_03_07/pull/179)
+- OpenAI Vision API로 약품 이미지 → 약품명 자동 인식
 
 ---
 
@@ -111,11 +110,11 @@
 
 #### 🔥 주요 트러블슈팅
 
-**1. FormData 업로드 시 빈 객체로 전송**
+**1. FormData 업로드 시 빈 객체로 전송** · [#174](https://github.com/AI-HealthCare-03/AH_03_07/pull/174)
 - 원인: 공통 `apiFetch`가 모든 body를 `JSON.stringify()`로 직렬화
 - 해결: `FormData` 타입 감지 → `Content-Type` 미설정 + body 그대로 전달
 
-**2. OCR 태스크 NotImplementedError**
+**2. OCR 태스크 NotImplementedError** · [#174](https://github.com/AI-HealthCare-03/AH_03_07/pull/174)
 - 원인: `process_ocr_task` 함수가 구현 없이 `raise NotImplementedError` 상태
 - 해결: CLOVA OCR API + OpenAI GPT 구조화 파이프라인 직접 구현
 
@@ -127,7 +126,7 @@
 - 원인: 마이그레이션 파일 중복 + MODELS_STATE 불일치
 - 해결: 중복 파일 삭제 후 aerich 재생성으로 phantom MODIFY 해결
 
-**5. 발표 당일 422 에러**
+**5. 발표 당일 422 에러** · [#214](https://github.com/AI-HealthCare-03/AH_03_07/pull/214)
 - 원인: 프론트에서 `document_type`을 한글("검사결과")로 전송, 백엔드는 영문 enum("lab_result") 기대
 - 해결: 위 디버깅 패턴으로 원인 추적 → 영문 enum 값으로 통일
 
