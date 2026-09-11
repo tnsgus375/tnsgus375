@@ -32,7 +32,7 @@
 ### MediGuide — AI 기반 헬스케어 관리 서비스
 > 만성·자가면역질환자를 위한 헬스케어 앱 (6주, 3인 팀)
 
-🔗 [팀 레포](https://github.com/AI-HealthCare-03/AH_03_07) · [배포 URL](https://mediguide7.duckdns.org)
+🔗 [팀 레포](https://github.com/AI-HealthCare-03/AH_03_07) 
 
 **기술 스택**: FastAPI · Tortoise ORM · MySQL · Celery · Redis · Docker · Next.js 15  
 **담당**: 일반 모드 백엔드 전체 + 프론트엔드 일부 (8개 기능)
