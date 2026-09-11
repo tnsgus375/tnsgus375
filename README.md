@@ -12,6 +12,7 @@
 **Backend**  
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![Tortoise ORM](https://img.shields.io/badge/Tortoise_ORM-FF5733?style=flat)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat&logo=redis&logoColor=white)
 ![Celery](https://img.shields.io/badge/Celery-37814A?style=flat)
@@ -23,6 +24,7 @@
 
 **AI / 외부 API 연동**  
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white)
+![CLOVA OCR](https://img.shields.io/badge/CLOVA_OCR-03C75A?style=flat&logo=naver&logoColor=white)
 ![Google Maps](https://img.shields.io/badge/Google_Maps_API-4285F4?style=flat&logo=googlemaps&logoColor=white)
 
 ---
